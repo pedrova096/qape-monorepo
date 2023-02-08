@@ -1,0 +1,47 @@
+# Desarrollo de Qape
+
+Este proyecto esta diseñado para crear una aplicación de cero, que utilice los principios básicos de una REST API con **nodeJS/expressJS** y un frontend con **svelte**
+
+## Comandos para iniciar
+
+```bash
+mkdir qape
+cd qape
+mkdir backend
+cd backend
+yarn init # npm init
+yarn add --dev typescript ts-node-dev # npm i --save-dev typescript ts-node-dev
+npx tsc --init
+```
+
+## Cambios en `package.json`
+
+```json
+"main": "dist",
+"scripts": {
+  "build": "tsc",
+  "dev": "ts-node-dev --respawn index.ts"
+},
+```
+
+## Cambios en `tsconfig.json`
+
+```json
+"outDir": "dist/",
+```
+
+## Archivo `.gitignore`
+
+```
+node_modules/
+
+dist/
+tmp/
+temp/
+
+log/*
+!log/.gitkeep
+*.log
+
+.env
+```
