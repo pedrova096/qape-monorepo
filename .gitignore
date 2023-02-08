@@ -1,0 +1,11 @@
+node_modules/
+
+dist/
+tmp/
+temp/
+
+log/*
+!log/.gitkeep
+*.log
+
+.env
