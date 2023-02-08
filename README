@@ -45,3 +45,10 @@ log/*
 
 .env
 ```
+
+## Comandos para el servidor Express
+
+```bash
+yarn add express helmet # npm i express helmet
+yarn add --dev @types/express # npm i --save-dev @types/express
+```
