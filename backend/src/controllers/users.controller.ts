@@ -1,31 +1,61 @@
 import { RequestHandler } from 'express';
+import usersService from '../service/users.service';
 
-const users: Array<{ name: string; email: string; phoneNumber: number }> = [];
-
-export const createUser: RequestHandler = (req, res) => {
-  const newUser = req.body;
-
-  const position = users.push(newUser) - 1;
-
-  res.json({ userIndex: position });
-};
-
-export const getUsers: RequestHandler = (req, res) => {
-  res.json(users);
-};
-
-export const getUserByIndex: RequestHandler = (req, res) => {
+export const createUser: RequestHandler = async (req, res, next) => {
   try {
-    const userIndex = parseInt(req.params.index);
+    const newUser = req.body;
 
-    const user = users[userIndex];
+    const result = await usersService.createUser(newUser);
 
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(400).send('no hay usuario con ese index');
-    }
+    res.json({ created: result });
   } catch (error) {
-    res.status(500).send('error obteniendo ese usuario');
+    next(error);
+  }
+};
+
+export const getUsers: RequestHandler = async (req, res, next) => {
+  try {
+    const result = await usersService.findAllUsers();
+
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUserById: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = parseInt(req.params.id);
+
+    const user = await usersService.findUserById(userId);
+
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateUserById: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = parseInt(req.params.id);
+    const userData = req.body;
+
+    const user = await usersService.updateUser(userId, userData);
+
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteUserById: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = parseInt(req.params.id);
+
+    const user = await usersService.deleteUser(userId);
+
+    res.json({ deleted: user });
+  } catch (error) {
+    next(error);
   }
 };

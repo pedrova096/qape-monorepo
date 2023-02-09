@@ -1,5 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
+import DB from './database';
+import errorHandler from './middleware/errorHandler';
 
 import routes from './routes/index';
 
@@ -11,6 +13,13 @@ app.use(express.json());
 
 app.use('/', routes);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server corriendo, puerto:${PORT}`);
-});
+app.use(errorHandler);
+
+const init = async () => {
+  await DB.sequelize.sync({ force: false, alter: false });
+  app.listen(PORT, () => {
+    console.log(`🚀 Server corriendo, puerto:${PORT}`);
+  });
+};
+
+init();
