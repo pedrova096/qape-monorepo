@@ -79,3 +79,17 @@ yarn add --dev @types/jsonwebtoken # npm i --save-dev @types/jsonwebtoken
 ```bash
 yarn add dotenv # npm i dotenv
 ```
+
+## Crear proyecto de front
+
+```bash
+# npm 6.x
+npm create vite@latest frontend --template svelte-ts
+# npm 7+, extra double-dash is needed:
+npm create vite@latest frontend -- --template svelte-ts
+# yarn
+yarn create vite frontend --template svelte-ts
+
+cd frontend
+yarn install
+```
