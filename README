@@ -93,3 +93,16 @@ yarn create vite frontend --template svelte-ts
 cd frontend
 yarn install
 ```
+
+## Agregar tailwind css
+
+```bash
+yarn add --dev tailwindcss postcss autoprefixer # npm i -D tailwindcss postcss autoprefixer
+npx tailwindcss init tailwind.config.cjs -p
+```
+
+## Cambios en `tailwind.config.cjs`
+
+```js
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+```
