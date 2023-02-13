@@ -16,7 +16,7 @@ app.use('/', routes);
 app.use(errorHandler);
 
 const init = async () => {
-  await DB.sequelize.sync({ force: false, alter: false });
+  await DB.sequelize.sync({ force: false, alter: true });
   app.listen(PORT, () => {
     console.log(`🚀 Server corriendo, puerto:${PORT}`);
   });

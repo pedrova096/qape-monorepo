@@ -1,17 +1,26 @@
 import DB from '../database';
-import type { User } from '../database/models/users.model';
+import type {
+  User,
+  UserModel,
+  UserResponse,
+} from '../database/models/users.model';
 import { isEmpty } from '../utility/common';
 import { RequestError } from '../utility/errorClass';
 
 class UserService {
   public users = DB.Users;
 
-  public async findAllUsers(): Promise<User[]> {
-    const allUser: User[] = await this.users.findAll();
-    return allUser;
+  private userMapper(userModel: UserModel): UserResponse {
+    const { password, ...user } = userModel.toJSON();
+    return user;
   }
 
-  public async findUserById(userId: number): Promise<User> {
+  public async findAllUsers(): Promise<UserResponse[]> {
+    const allUser = await this.users.findAll();
+    return allUser.map(this.userMapper);
+  }
+
+  public async findUserById(userId: number): Promise<UserResponse> {
     if (isEmpty(userId)) {
       throw new RequestError({
         status: 400,
@@ -30,10 +39,10 @@ class UserService {
       });
     }
 
-    return findUser.toJSON();
+    return this.userMapper(findUser);
   }
 
-  public async createUser(userData: User): Promise<User> {
+  public async createUser(userData: User): Promise<UserResponse> {
     if (isEmpty(userData)) {
       throw new RequestError({
         status: 400,
@@ -58,13 +67,13 @@ class UserService {
       ...userData,
     });
 
-    return createUserData.toJSON();
+    return this.userMapper(createUserData);
   }
 
   public async updateUser(
     userId: number,
     userData: Partial<User>
-  ): Promise<User> {
+  ): Promise<UserResponse> {
     if (isEmpty(userData)) {
       throw new RequestError({
         status: 400,
@@ -82,10 +91,10 @@ class UserService {
 
     const [updatedUserData] = rowsEdited;
 
-    return updatedUserData.toJSON();
+    return this.userMapper(updatedUserData);
   }
 
-  public async deleteUser(userId: number): Promise<User> {
+  public async deleteUser(userId: number): Promise<UserResponse> {
     const findUser = await this.findUserById(userId);
 
     await this.users.destroy({ where: { id: findUser.id }, cascade: true });
