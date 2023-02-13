@@ -11,3 +11,13 @@ export const signIn: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
+
+export const signUp: RequestHandler = async (req, res, next) => {
+  try {
+    const result = await authService.signUp(req.body);
+
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};

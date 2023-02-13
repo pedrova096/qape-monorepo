@@ -60,6 +60,12 @@ class AuthService {
     return { token: tokenData, user: this.usersService.userMapper(findUser) };
   }
 
+  public async signUp(userData: User): Promise<UserResponse> {
+    const createdUser = await this.usersService.createUser(userData);
+
+    return createdUser;
+  }
+
   public createToken(user: User): string {
     const dataStoredInToken: DataStoredInToken = { id: user.id };
     const expiresIn = 60 * 60;
