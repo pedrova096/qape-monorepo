@@ -1,4 +1,6 @@
-export const isEmpty = (value: string | number | object): boolean => {
+export const isEmpty = (
+  value?: string | number | object | boolean
+): boolean => {
   if (value === null) {
     return true;
   } else if (typeof value !== 'number' && value === '') {
