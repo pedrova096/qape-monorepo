@@ -10,7 +10,7 @@ import { RequestError } from '../utility/errorClass';
 class UserService {
   public users = DB.Users;
 
-  private userMapper(userModel: UserModel): UserResponse {
+  public userMapper(userModel: UserModel): UserResponse {
     const { password, ...user } = userModel.toJSON();
     return user;
   }

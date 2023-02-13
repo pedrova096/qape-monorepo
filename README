@@ -64,4 +64,6 @@ yarn add sequelize pg pg-hstore # npm i sequelize pg pg-hstore
 ```bash
 yarn add bcrypt # npm i bcrypt
 yarn add --dev @types/bcrypt # npm i --save-dev @types/bcrypt
+yarn add jsonwebtoken # npm i jsonwebtoken
+yarn add --dev @types/jsonwebtoken # npm i --save-dev @types/jsonwebtoken
 ```
