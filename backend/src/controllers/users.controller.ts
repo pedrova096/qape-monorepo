@@ -37,7 +37,7 @@ export const getUserById: RequestHandler = async (req, res, next) => {
 
 export const updateUserById: RequestHandler = async (req, res, next) => {
   try {
-    const userId = parseInt(req.params.id);
+    const userId = req.user.id;
     const userData = req.body;
 
     const user = await usersService.updateUser(userId, userData);
@@ -50,7 +50,7 @@ export const updateUserById: RequestHandler = async (req, res, next) => {
 
 export const deleteUserById: RequestHandler = async (req, res, next) => {
   try {
-    const userId = parseInt(req.params.id);
+    const userId = req.user.id;
 
     const user = await usersService.deleteUser(userId);
 
