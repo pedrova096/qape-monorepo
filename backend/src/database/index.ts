@@ -1,7 +1,8 @@
 import Sequelize from 'sequelize';
 import UserModel from './models/users.model';
+import { POSTGRES_URI } from '../config/environments';
 
-const sequelize = new Sequelize.Sequelize('db_uri', {
+const sequelize = new Sequelize.Sequelize(POSTGRES_URI, {
   timezone: '-03:00',
 });
 

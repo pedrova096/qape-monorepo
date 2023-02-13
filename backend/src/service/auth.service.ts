@@ -4,6 +4,7 @@ import { RequestError } from '../utility/errorClass';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import UsersService from './users.service';
+import { JWT_SECRET } from '../config/environments';
 
 export type DataStoredInToken = {
   id: number;
@@ -61,10 +62,9 @@ class AuthService {
 
   public createToken(user: User): string {
     const dataStoredInToken: DataStoredInToken = { id: user.id };
-    const secretKey = 'secret';
     const expiresIn = 60 * 60;
 
-    return jwt.sign(dataStoredInToken, secretKey, { expiresIn });
+    return jwt.sign(dataStoredInToken, JWT_SECRET, { expiresIn });
   }
 }
 

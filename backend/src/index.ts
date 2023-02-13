@@ -1,12 +1,13 @@
+import 'dotenv/config';
 import express from 'express';
 import helmet from 'helmet';
+import { PORT } from './config/environments';
 import DB from './database';
 import errorHandler from './middleware/errorHandler';
 
 import routes from './routes/index';
 
 const app = express();
-const PORT = 8080;
 
 app.use(helmet());
 app.use(express.json());

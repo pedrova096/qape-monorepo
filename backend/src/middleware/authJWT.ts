@@ -1,5 +1,6 @@
 import { RequestHandler } from 'express';
 import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from '../config/environments';
 import HTTPStatusCode from '../config/httpStatusCode';
 import authService, { DataStoredInToken } from '../service/auth.service';
 import { RequestError } from '../utility/errorClass';
@@ -13,10 +14,9 @@ const authJWT: RequestHandler = async (req, res, next) => {
         : null);
 
     if (authorization) {
-      const secretKey = 'secret';
       const verificationResponse = jwt.verify(
         authorization,
-        secretKey
+        JWT_SECRET
       ) as DataStoredInToken;
       const userId = verificationResponse.id;
       const findUser = await authService.findUserById(userId);

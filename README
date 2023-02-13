@@ -73,3 +73,9 @@ yarn add --dev @types/jsonwebtoken # npm i --save-dev @types/jsonwebtoken
 ```json
  "typeRoots": ["./src/types", "./node_modules/@types"],
 ```
+
+## Comandos para las variables de ambiente
+
+```bash
+yarn add dotenv # npm i dotenv
+```
