@@ -1,46 +1,64 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import Counter from './lib/Counter.svelte'
+  import qapeLogo from './assets/qape-logo.svg';
+  import heroPhoto from './assets/pexels-thirdman-8053704.png';
 </script>
 
-<main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer"> 
-      <img src="/vite.svg" class="logo" alt="Vite Logo" />
+<header class="p-6 absolute w-full">
+  <nav class="container mx-auto flex items-center justify-between relative">
+    <a href="/" class="z-10">
+      <img src={qapeLogo} class="h-8" alt="Qape Logo" />
     </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer"> 
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
+    <div>
+      <a href="#" class="px-4 py-2 hover:bg-slate-100 rounded-md font-semibold">
+        Inicio
+      </a>
+      <a href="#" class="px-4 py-2 hover:bg-slate-100 rounded-md font-semibold">
+        Nosotros
+      </a>
+      <a href="#" class="px-4 py-2 hover:bg-slate-100 rounded-md font-semibold">
+        Login
+      </a>
+      <a
+        href="#"
+        class="outline outline-2 outline-slate-800 -outline-offset-2 px-4 py-2 rounded-md font-semibold"
+      >
+        Regístrate
+      </a>
+    </div>
+  </nav>
+</header>
 
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
+<div class="w-full flex justify-center">
+  <main class="container h-screen flex pt-20">
+    <section class="mx-auto p-10 flex-1 flex flex-col justify-center gap-5">
+      <h1 class="text-5xl font-bold leading-tight">
+        Completa<br />
+        la <span class="highlight">experiencia</span> <br />
+        de tus oídos
+      </h1>
+      <p class="text-slate-500 leading-relaxed">
+        Nunca más tendrás que preocuparte por<br />
+        tener audífonos incompletos o piezas extras.
+      </p>
+      <div class="flex w-2/3 gap-10 mt-10">
+        <button
+          class="outline outline-2 outline-amber-500 -outline-offset-2 px-4 py-3 rounded-md font-semibold flex-1"
+        >
+          Vender
+        </button>
+        <button
+          class="bg-amber-500 px-4 py-3 rounded-md font-semibold text-white tracking-wide flex-1"
+        >
+          Buscar
+        </button>
+      </div>
+    </section>
+    <section class="w-1/2 h-full overflow-hidden flex justify-center relative">
+      <img
+        src={heroPhoto}
+        class="h-[90%] object-contain mt-auto z-10"
+        alt="Happy woman with earphones"
+      />
+    </section>
+  </main>
+</div>
