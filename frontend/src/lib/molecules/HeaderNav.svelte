@@ -1,6 +1,6 @@
 <script>
-  import qapeLogo from '../../assets/qape-logo.svg';
-  import Button from '../atoms/Button.svelte';
+  import qapeLogo from '~/assets/qape-logo.svg';
+  import Button from '~/lib/atoms/Button.svelte';
   import { Link } from 'svelte-navigator';
 </script>
 

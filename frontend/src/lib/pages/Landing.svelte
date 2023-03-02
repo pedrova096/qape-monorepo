@@ -1,6 +1,6 @@
 <script lang="ts">
-  import heroPhoto from '../../assets/pexels-thirdman-8053704.png';
-  import Button from '../atoms/Button.svelte';
+  import heroPhoto from '~/assets/pexels-thirdman-8053704.png';
+  import Button from '~/lib/atoms/Button.svelte';
 </script>
 
 <div class="w-full flex justify-center">

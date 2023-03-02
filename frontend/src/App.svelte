@@ -1,7 +1,7 @@
 <script>
   import { Router, Route } from 'svelte-navigator';
-  import { Landing, SignUp } from './lib/pages';
-  import HeaderNav from './lib/molecules/HeaderNav.svelte';
+  import { Landing, SignUp } from '~/lib/pages';
+  import HeaderNav from '~/lib/molecules/HeaderNav.svelte';
 </script>
 
 <Router>

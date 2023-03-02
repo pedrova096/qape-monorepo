@@ -112,3 +112,32 @@ npx tailwindcss init tailwind.config.cjs -p
 ```bash
 yarn add svelte-navigator # npm i svelte-navigator
 ```
+
+## Ajustar la importación relativa
+
+### Cambiar en `tsconfig.json`
+
+```json
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+```
+
+### Cambiar en `vite.config.ts`
+
+```ts
+import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { resolve } from 'path';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [svelte()],
+  resolve: {
+    alias: {
+      '~': resolve('./src'),
+    },
+  },
+});
+```
