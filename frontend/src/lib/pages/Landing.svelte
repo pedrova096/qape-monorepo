@@ -1,5 +1,6 @@
 <script lang="ts">
   import heroPhoto from '../../assets/pexels-thirdman-8053704.png';
+  import Button from '../atoms/Button.svelte';
 </script>
 
 <div class="w-full flex justify-center">
@@ -15,16 +16,8 @@
         tener audífonos incompletos o piezas extras.
       </p>
       <div class="flex w-2/3 gap-10 mt-10">
-        <button
-          class="outline outline-2 outline-amber-500 -outline-offset-2 px-4 py-3 rounded-md font-semibold flex-1"
-        >
-          Vender
-        </button>
-        <button
-          class="bg-amber-500 px-4 py-3 rounded-md font-semibold text-white tracking-wide flex-1"
-        >
-          Buscar
-        </button>
+        <Button class="flex-1" variant="outline">Vender</Button>
+        <Button class="flex-1" variant="fill">Buscar</Button>
       </div>
     </section>
     <section class="w-1/2 h-full overflow-hidden flex justify-center relative">
