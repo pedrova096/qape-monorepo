@@ -106,3 +106,9 @@ npx tailwindcss init tailwind.config.cjs -p
 ```js
   content: ['./src/**/*.{html,js,svelte,ts}'],
 ```
+
+## Agregar librería de router
+
+```bash
+yarn add svelte-navigator # npm i svelte-navigator
+```
