@@ -1,10 +1,14 @@
 <script lang="ts">
+  import type { HTMLButtonAttributes } from 'svelte/elements';
+
   let className = '';
   export { className as class };
   export let variant: 'fill' | 'outline' | 'basic' = 'basic';
+  export let type: HTMLButtonAttributes['type'] = 'button';
 </script>
 
 <button
+  {type}
   class:full-fill={variant === 'fill'}
   class:full-outline={variant === 'outline' || variant === 'basic'}
   class:outline-amber-500={variant === 'outline'}

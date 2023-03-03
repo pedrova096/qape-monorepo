@@ -2,10 +2,19 @@
   import qapeLogo from '~/assets/qape-logo.svg';
   import Button from '~/lib/atoms/Button.svelte';
   import DecorationDots from '~/lib/atoms/DecorationDots.svelte';
-  import { Link } from 'svelte-navigator';
+  import { Link, useLocation } from 'svelte-navigator';
+
+  const location = useLocation();
+
+  $: isNotLanding = $location.pathname !== '/';
 </script>
 
-<header class="p-6 absolute w-full">
+<header
+  class="p-6 absolute w-full bg-white"
+  class:overflow-hidden={isNotLanding}
+  class:shadow={isNotLanding}
+  class:z-20={isNotLanding}
+>
   <nav class="container mx-auto flex items-center justify-between relative">
     <Link to="/" class="z-10">
       <img src={qapeLogo} class="h-8" alt="Qape Logo" />
