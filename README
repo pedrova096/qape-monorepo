@@ -147,3 +147,9 @@ export default defineConfig({
 ```bash
 yarn add --dev @iconify/svelte # npm i -D @iconify/svelte
 ```
+
+## Agregar librería de formularios
+
+```bash
+yarn add svelte-forms # npm i svelte-forms
+```

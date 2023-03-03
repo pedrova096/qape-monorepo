@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { Link } from 'svelte-navigator';
   import Icon from '@iconify/svelte';
   import heroPhoto from '~/assets/pexels-ekaterina-bolovtsova-4050214.png';
@@ -6,6 +6,19 @@
   import Input from '~/lib/atoms/Input.svelte';
   import Button from '~/lib/atoms/Button.svelte';
   import InputPassword from '~/lib/molecules/InputPassword.svelte';
+  import signupForm, {
+    name,
+    email,
+    password,
+    passwordConfirmation,
+  } from '~/forms/signup.form';
+  import type { SignupFormType } from '~/forms/signup.form';
+  import { errorMessages } from '~/forms/errorMessages';
+  import { handleSubmit } from '~/forms/handleSubmit';
+
+  const submit = async (data: SignupFormType) => {
+    alert(JSON.stringify(data, null, 2));
+  };
 </script>
 
 <div class="w-full flex justify-center overflow-hidden relative">
@@ -30,14 +43,38 @@
       class="w-1/2 h-full flex flex-col relative bg-white py-20 px-10 z-10 gap-8"
     >
       <h2 class="font-bold text-2xl tracking-wide">Crea tu cuenta</h2>
-      <form class="flex-1 flex flex-col gap-6">
-        <Input label="Nombre" placeholder="John Doe" />
-        <Input label="Correo" placeholder="john@doe.com" type="email" />
+      <form
+        class="flex-1 flex flex-col gap-6"
+        on:submit={handleSubmit(signupForm, submit)}
+      >
+        <Input
+          label="Nombre"
+          placeholder="John Doe"
+          bind:value={$name.value}
+          error={$name.invalid}
+          helpText={errorMessages($name.errors)}
+        />
+        <Input
+          label="Correo"
+          placeholder="john@doe.com"
+          type="email"
+          bind:value={$email.value}
+          error={$email.invalid}
+          helpText={errorMessages($email.errors)}
+        />
         <InputPassword
           label="Contraseña"
-          helpText="La contraseña debe tener al menos 6 caracteres"
+          bind:value={$password.value}
+          error={$password.invalid}
+          helpText={errorMessages($password.errors) ||
+            'La contraseña debe tener al menos 6 caracteres'}
         />
-        <InputPassword label="Confirmar contraseña" />
+        <InputPassword
+          label="Confirmar contraseña"
+          bind:value={$passwordConfirmation.value}
+          error={$passwordConfirmation.invalid}
+          helpText={errorMessages($passwordConfirmation.errors)}
+        />
         <Button variant="fill" type="submit">Crear</Button>
       </form>
       <footer class="w-full text-center">
