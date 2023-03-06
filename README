@@ -153,3 +153,10 @@ yarn add --dev @iconify/svelte # npm i -D @iconify/svelte
 ```bash
 yarn add svelte-forms # npm i svelte-forms
 ```
+
+## Agregar CORS en el backend
+
+```bash
+yarn add cors # npm i cors
+yarn add --dev @types/cors # npm i -D @types/cors
+```

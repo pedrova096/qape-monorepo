@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Link } from 'svelte-navigator';
+  import { Link, navigate } from 'svelte-navigator';
   import Icon from '@iconify/svelte';
   import heroPhoto from '~/assets/pexels-ekaterina-bolovtsova-4050214.png';
   import dots from '~/assets/decoration-dots.png';
@@ -15,9 +15,24 @@
   import type { SignupFormType } from '~/forms/signup.form';
   import { errorMessages } from '~/forms/errorMessages';
   import { handleSubmit } from '~/forms/handleSubmit';
+  import { signUp } from '~/services/auth.services';
+  import { useApiCall } from '~/stores/useApiCall';
+  import toast from '~/stores/toast';
+
+  const { execute: signUpCall, flags } = useApiCall(signUp, {
+    runOnMount: false,
+    onSuccess: () => {
+      toast.success('¡Cuenta creada exitosamente!');
+      navigate('/login', { replace: true });
+    },
+    onError: (error) => {
+      toast.error('Hubo un error al crear la cuenta.');
+      console.error(error);
+    },
+  });
 
   const submit = async (data: SignupFormType) => {
-    alert(JSON.stringify(data, null, 2));
+    signUpCall(data);
   };
 </script>
 
@@ -45,6 +60,7 @@
       <h2 class="font-bold text-2xl tracking-wide">Crea tu cuenta</h2>
       <form
         class="flex-1 flex flex-col gap-6"
+        class:pointer-events={$flags.isLoading ? 'none' : ''}
         on:submit={handleSubmit(signupForm, submit)}
       >
         <Input
@@ -75,7 +91,16 @@
           error={$passwordConfirmation.invalid}
           helpText={errorMessages($passwordConfirmation.errors)}
         />
-        <Button variant="fill" type="submit">Crear</Button>
+        <Button variant="fill" type="submit" class="flex relative">
+          {@const buttonText = $flags.isLoading ? 'Creando' : 'Crear'}
+          <span class="text-center w-full">{buttonText}</span>
+          {#if $flags.isLoading}
+            <Icon
+              icon="fluent:spinner-ios-20-filled"
+              class="animate-spin text-xl absolute right-4"
+            />
+          {/if}
+        </Button>
       </form>
       <footer class="w-full text-center">
         <span class="text-sm">
