@@ -2,7 +2,7 @@ import { writable, derived } from 'svelte/store';
 import type { RequestError } from '~/services/api';
 
 type ApiCall<Res, Req> = (body?: Req) => Promise<Res>;
-type ApiCallState = 'IDLE' | 'LOADING' | 'SUCCESS' | 'ERROR';
+type ApiCallState = 'IDLE' | 'LOADING' | 'SUCCESS' | 'ERROR' | 'REFRESH';
 
 type ApiCallOptions<Res> = {
   runOnMount?: boolean;
@@ -19,7 +19,7 @@ export const useApiCall = <Res = unknown, Req = void>(
   const error = writable<RequestError | null>(null);
 
   const execute = async (body: Req) => {
-    state.set('LOADING');
+    state.update((f) => (f === 'IDLE' ? 'LOADING' : 'REFRESH'));
 
     try {
       const result = await call(body);
@@ -42,6 +42,7 @@ export const useApiCall = <Res = unknown, Req = void>(
     isSuccess: $state === 'SUCCESS',
     isError: $state === 'ERROR',
     isIdle: $state === 'IDLE',
+    isRefreshing: $state === 'REFRESH',
   }));
 
   return {

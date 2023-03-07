@@ -6,6 +6,7 @@ import type {
 } from '../database/models/users.model';
 import { isEmpty } from '../utility/common';
 import { RequestError } from '../utility/errorClass';
+import bcrypt from 'bcrypt';
 
 class UserService {
   public users = DB.Users;
@@ -83,6 +84,13 @@ class UserService {
     }
 
     const findUser = await this.findUserById(userId);
+
+    if (userData.password) {
+      userData.password = bcrypt.hashSync(
+        userData.password,
+        bcrypt.genSaltSync(10)
+      );
+    }
 
     const [countRowsEdited, rowsEdited] = await this.users.update(
       { ...userData },

@@ -2,6 +2,7 @@
   import { Router, Route } from 'svelte-navigator';
   import { Landing, SignUp, Login, Profile } from '~/lib/pages';
   import HeaderNav from '~/lib/molecules/HeaderNav.svelte';
+  import PublicOnlyRoute from '~/lib/molecules/PublicOnlyRoute.svelte';
   import Toasts from '~/lib/atoms/Toasts.svelte';
   import { localStoragefy } from '~/stores/auth.store';
 
@@ -12,7 +13,7 @@
   <HeaderNav />
   <Toasts />
   <Route path="/" component={Landing} />
-  <Route path="/sign-up" component={SignUp} />
-  <Route path="/login" component={Login} />
+  <PublicOnlyRoute path="/sign-up" component={SignUp} />
+  <PublicOnlyRoute path="/login" component={Login} />
   <Route path="/profile" component={Profile} />
 </Router>

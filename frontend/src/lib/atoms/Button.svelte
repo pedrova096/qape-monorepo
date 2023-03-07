@@ -5,7 +5,7 @@
   export { className as class };
   export let variant: 'fill' | 'outline' | 'basic' = 'basic';
   export let type: HTMLButtonAttributes['type'] = 'button';
-  export let onClick: HTMLButtonAttributes['on:click'] = () => {};
+  export let onClick: HTMLButtonAttributes['on:click'] = undefined;
 </script>
 
 <button
