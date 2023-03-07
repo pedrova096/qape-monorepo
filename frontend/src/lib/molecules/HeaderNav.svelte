@@ -30,9 +30,12 @@
       <a href="#" class="px-4 py-2 hover:bg-slate-100 rounded-md font-semibold">
         Nosotros
       </a>
-      <a href="#" class="px-4 py-2 hover:bg-slate-100 rounded-md font-semibold">
+      <Link
+        to="/login"
+        class="px-4 py-2 hover:bg-slate-100 rounded-md font-semibold"
+      >
         Login
-      </a>
+      </Link>
       <Link to="/sign-up">
         <Button class="!py-2">Regístrate</Button>
       </Link>
