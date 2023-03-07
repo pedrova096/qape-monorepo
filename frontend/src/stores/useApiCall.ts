@@ -10,7 +10,7 @@ type ApiCallOptions<Res> = {
   onError?: (error: RequestError) => void;
 };
 
-export const useApiCall = <Res = unknown, Req = unknown>(
+export const useApiCall = <Res = unknown, Req = void>(
   call: ApiCall<Res, Req>,
   options: ApiCallOptions<Res> = { runOnMount: true }
 ) => {
@@ -45,6 +45,7 @@ export const useApiCall = <Res = unknown, Req = unknown>(
   }));
 
   return {
+    state,
     flags,
     data,
     error,

@@ -12,10 +12,12 @@
   import { useApiCall } from '~/stores/useApiCall';
   import { signIn } from '~/services/auth.services';
   import toast from '~/stores/toast';
+  import { authStore } from '~/stores/auth.store';
 
   const { execute: signInCall, flags } = useApiCall(signIn, {
     runOnMount: false,
-    onSuccess: () => {
+    onSuccess: (result) => {
+      $authStore = result;
       toast.success('¡Bienvenido de vuelta!');
       navigate('/search', { replace: true });
     },

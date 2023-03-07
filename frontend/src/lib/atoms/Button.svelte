@@ -5,10 +5,12 @@
   export { className as class };
   export let variant: 'fill' | 'outline' | 'basic' = 'basic';
   export let type: HTMLButtonAttributes['type'] = 'button';
+  export let onClick: HTMLButtonAttributes['on:click'] = () => {};
 </script>
 
 <button
   {type}
+  on:click={onClick}
   class:full-fill={variant === 'fill'}
   class:full-outline={variant === 'outline' || variant === 'basic'}
   class:outline-amber-500={variant === 'outline'}

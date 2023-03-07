@@ -1,3 +1,5 @@
+import { getAuthStoreToken, clearAuthStoreToken } from '~/stores/auth.store';
+
 type FetchArgs<T> = {
   endpoint: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
@@ -16,6 +18,14 @@ export class ApiService {
     return contentType.includes('application/json');
   }
 
+  get bearerToken() {
+    const token = getAuthStoreToken();
+    if (token) {
+      return `Bearer ${token}`;
+    }
+    return null;
+  }
+
   async fetch<Res = unknown, Req = unknown>({
     endpoint,
     method,
@@ -30,6 +40,12 @@ export class ApiService {
       body: data ? JSON.stringify(data) : undefined,
     };
 
+    const token = this.bearerToken;
+
+    if (token) {
+      config.headers['Authorization'] = token;
+    }
+
     const response: Response = await fetch(url, config);
     const isJsonResponse = this.isJsonResponse(response);
     const responseJson = isJsonResponse ? await response.json() : null;
@@ -37,6 +53,10 @@ export class ApiService {
     if (response.ok) {
       return responseJson as Res;
     } else {
+      if (response.status === 401) {
+        clearAuthStoreToken();
+      }
+
       const { error } = responseJson;
 
       if (!error) {
