@@ -13,6 +13,7 @@
   import { signIn } from '~/services/auth.services';
   import toast from '~/stores/toast';
   import { authStore } from '~/stores/auth.store';
+  import { onDestroy } from 'svelte';
 
   const { execute: signInCall, flags } = useApiCall(signIn, {
     runOnMount: false,
@@ -30,6 +31,10 @@
   const submit = async (data: LoginFormType) => {
     signInCall(data);
   };
+
+  onDestroy(() => {
+    LoginForm.reset();
+  });
 </script>
 
 <main class="flex justify-center items-center w-full h-screen pt-20">
@@ -71,7 +76,7 @@
     <footer class="w-full text-center">
       <span class="text-sm">
         ¿Ya tienes una cuenta?
-        <Link to="/login" class="font-bold underline">Regístrate</Link>
+        <Link to="/sign-up" class="font-bold underline">Regístrate</Link>
       </span>
     </footer>
   </div>

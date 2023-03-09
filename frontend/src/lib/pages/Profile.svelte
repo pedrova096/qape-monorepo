@@ -105,6 +105,21 @@
         </Link>
       {/if}
     </header>
+    {#if $user}
+      <div class="flex flex-col gap-4 mt-8 flex-1 w-full">
+        <nav class="bg-slate-100 flex items-center">
+          <Link class="inline-block p-2" to="/profile/publishes"
+            >Mis publicaciones</Link
+          >
+          <Link class="inline-block p-2" to="/profile/buys">Mis compras</Link>
+          <div class="ml-auto">
+            <Link class="inline-block p-2" to="/items/new">
+              <Button variant="fill">Crear Item</Button>
+            </Link>
+          </div>
+        </nav>
+      </div>
+    {/if}
   </main>
 </div>
 

@@ -18,6 +18,7 @@
   import { signUp } from '~/services/auth.services';
   import { useApiCall } from '~/stores/useApiCall';
   import toast from '~/stores/toast';
+  import { onDestroy } from 'svelte';
 
   const { execute: signUpCall, flags } = useApiCall(signUp, {
     runOnMount: false,
@@ -34,6 +35,10 @@
   const submit = async (data: SignupFormType) => {
     signUpCall(data);
   };
+
+  onDestroy(() => {
+    signupForm.reset();
+  });
 </script>
 
 <div class="w-full flex justify-center overflow-hidden relative">
