@@ -8,6 +8,7 @@
     caseStokeIcon,
   } from '~/assets/icons';
   import { Link } from 'svelte-navigator';
+  import ItemImage from './ItemImage.svelte';
 
   export let items: ItemResponse[] = [];
 </script>
@@ -22,25 +23,7 @@
           class="grid p-2 grid-flow-col grid-rows-3 auto-cols-[auto_1fr] gap-x-2 relative"
           to="/items/{id}"
         >
-          <div
-            class="w-24 aspect-square bg-slate-800 rounded-md row-span-3 grid grid-cols-2 grid-rows-[1fr_2fr] p-2 place-items-center gap-y-1 "
-          >
-            <img
-              src={hasLeft ? earphoneFillIcon : earphoneStokeIcon}
-              alt="earphoneLeftIcon"
-              class="invert -rotate-[20deg] h-full"
-            />
-            <img
-              src={hasRight ? earphoneFillIcon : earphoneStokeIcon}
-              alt="earphoneRightIcon"
-              class="invert -scale-x-100 rotate-[20deg] h-full"
-            />
-            <img
-              src={hasCharger ? caseFillAltIcon : caseStokeIcon}
-              alt="caseIcon"
-              class="h-full invert col-span-2"
-            />
-          </div>
+          <ItemImage {hasLeft} {hasRight} {hasCharger} />
           <div>
             <span class="font-semibold">{brand}</span>
             <span class="text-xs bg-slate-200 text-slate-600 px-1 rounded">

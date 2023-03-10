@@ -28,6 +28,7 @@
   } from '~/assets/icons';
   import type { ChangeEventHandler } from 'svelte/elements';
   import { onDestroy } from 'svelte';
+  import ItemChecks from '../molecules/ItemChecks.svelte';
 
   const { flags, execute: createItemCall } = useApiCall(createItem, {
     runOnMount: false,
@@ -120,75 +121,14 @@
       >
         Características de los audífonos
       </span>
-      <CheckIcon
-        id="isNew"
-        bind:checked={$isNew.value}
-        label="Son nuevos"
-        labelInactive="No son nuevos"
-        onChange={handleIsNewChange}
-      >
-        <Icon
-          icon="fluent:checkmark-12-regular"
-          class="text-2xl text-white"
-          slot="active"
-        />
-        <Icon
-          icon="fluent:checkmark-12-regular"
-          class="text-2xl text-slate-500"
-          slot="inactive"
-        />
-      </CheckIcon>
-
-      <CheckIcon
-        id="hasRight"
-        bind:checked={$hasRight.value}
-        label="Con lado derecho"
-        onChange={handleCharacteristicsChange}
-        labelInactive="Sin lado derecho"
-      >
-        <img
-          src={earphoneFillIcon}
-          alt="earphoneFillIcon"
-          class="invert -scale-x-100"
-          slot="active"
-        />
-        <img
-          src={earphoneStokeIcon}
-          alt="earphoneStokeIcon"
-          class="-scale-x-100"
-          slot="inactive"
-        />
-      </CheckIcon>
-      <CheckIcon
-        id="hasLeft"
-        bind:checked={$hasLeft.value}
-        label="Con lado izquierdo"
-        onChange={handleCharacteristicsChange}
-        labelInactive="Sin lado izquierdo"
-      >
-        <img
-          src={earphoneFillIcon}
-          alt="earphoneFillIcon"
-          class="invert"
-          slot="active"
-        />
-        <img src={earphoneStokeIcon} alt="earphoneStokeIcon" slot="inactive" />
-      </CheckIcon>
-      <CheckIcon
-        id="hasCharger"
-        bind:checked={$hasCharger.value}
-        label="Con cargador"
-        onChange={handleCharacteristicsChange}
-        labelInactive="Sin cargador"
-      >
-        <img
-          src={caseFillIcon}
-          alt="earphoneFillIcon"
-          class="invert"
-          slot="active"
-        />
-        <img src={caseStokeIcon} alt="earphoneStokeIcon" slot="inactive" />
-      </CheckIcon>
+      <ItemChecks
+        bind:hasLeft={$hasLeft.value}
+        bind:hasRight={$hasRight.value}
+        bind:hasCharger={$hasCharger.value}
+        bind:isNew={$isNew.value}
+        onIsNewChange={handleIsNewChange}
+        onCharacteristicsChange={handleCharacteristicsChange}
+      />
       <Button variant="fill" type="submit" class="flex relative mt-auto">
         {@const buttonText = $flags.isLoading ? 'Creando' : 'Crear'}
         <span class="text-center w-full">{buttonText}</span>

@@ -29,3 +29,9 @@ export const createItem = (item: ItemRequest) => {
     data: { ...item, type: 'earphones' },
   });
 };
+
+export const getItemById = (id: number | string) => {
+  return apiService.get<ItemResponse>({
+    endpoint: `items/${id}`,
+  });
+};
