@@ -15,6 +15,6 @@
   <Route path="/" component={Landing} />
   <PublicOnlyRoute path="/sign-up" component={SignUp} />
   <PublicOnlyRoute path="/login" component={Login} />
-  <Route path="/profile" component={Profile} />
+  <Route path="/profile/*" component={Profile} />
   <Route path="/items/new" component={NewItems} />
 </Router>

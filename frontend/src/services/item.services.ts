@@ -17,6 +17,12 @@ export type ItemResponse = {
 
 export type ItemRequest = Omit<ItemResponse, 'id' | 'userId' | 'status'>;
 
+export const getUserItems = () => {
+  return apiService.get<ItemResponse[]>({
+    endpoint: `items`,
+  });
+};
+
 export const createItem = (item: ItemRequest) => {
   return apiService.post<{ created: ItemResponse }>({
     endpoint: `items`,

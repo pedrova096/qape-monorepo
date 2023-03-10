@@ -168,6 +168,25 @@ class ItemService {
 
     return findItems;
   }
+
+  public async getItemsByUserId(userId: number): Promise<Item[]> {
+    if (isEmpty(userId)) {
+      throw new RequestError({
+        status: 400,
+        message: 'user id recibido esta vacío',
+        code: 'USER_ID_PAYLOAD_EMPTY',
+      });
+    }
+
+    const findItems = await this.items.findAll({
+      where: {
+        userId,
+        ...this._NOT_DELETED,
+      },
+    });
+
+    return findItems;
+  }
 }
 
 export default new ItemService();

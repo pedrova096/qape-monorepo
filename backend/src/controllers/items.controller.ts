@@ -89,3 +89,15 @@ export const deleteItemById: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getItemsByUserId: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+
+    const items = await itemsService.getItemsByUserId(userId);
+
+    res.json(items);
+  } catch (error) {
+    next(error);
+  }
+};

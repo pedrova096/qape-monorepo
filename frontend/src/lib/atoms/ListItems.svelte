@@ -1,0 +1,78 @@
+<script lang="ts">
+  import type { ItemResponse } from '~/services/item.services';
+  import Icon from '@iconify/svelte';
+  import {
+    earphoneFillIcon,
+    earphoneStokeIcon,
+    caseFillAltIcon,
+    caseStokeIcon,
+  } from '~/assets/icons';
+  import { Link } from 'svelte-navigator';
+
+  export let items: ItemResponse[] = [];
+</script>
+
+<ul class="flex-1 grid grid-cols-2 gap-5 items-start">
+  {#if items.length}
+    {#each items as { id, brand, model, description, price, isNew, hasLeft, hasRight, hasCharger } (id)}
+      <li
+        class="bg-white rounded-md shadow-md shadow-slate-700/5 border border-slate-200 hover:shadow-slate-700/10 cursor-pointer"
+      >
+        <Link
+          class="grid p-2 grid-flow-col grid-rows-3 auto-cols-[auto_1fr] gap-x-2 relative"
+          to="/items/{id}"
+        >
+          <div
+            class="w-24 aspect-square bg-slate-800 rounded-md row-span-3 grid grid-cols-2 grid-rows-[1fr_2fr] p-2 place-items-center gap-y-1 "
+          >
+            <img
+              src={hasLeft ? earphoneFillIcon : earphoneStokeIcon}
+              alt="earphoneLeftIcon"
+              class="invert -rotate-[20deg] h-full"
+            />
+            <img
+              src={hasRight ? earphoneFillIcon : earphoneStokeIcon}
+              alt="earphoneRightIcon"
+              class="invert -scale-x-100 rotate-[20deg] h-full"
+            />
+            <img
+              src={hasCharger ? caseFillAltIcon : caseStokeIcon}
+              alt="caseIcon"
+              class="h-full invert col-span-2"
+            />
+          </div>
+          <div>
+            <span class="font-semibold">{brand}</span>
+            <span class="text-xs bg-slate-200 text-slate-600 px-1 rounded">
+              {model}
+            </span>
+          </div>
+          <p class="text-slate-600">{description}</p>
+          <span
+            class="bg-emerald-500  place-self-start text-white px-1 rounded"
+          >
+            {new Intl.NumberFormat('es-PY', {
+              style: 'currency',
+              currency: 'PYG',
+            }).format(price)}
+          </span>
+          <div>
+            {#if isNew}
+              <span
+                class="text-xs text-slate-200 bg-slate-800 px-2 absolute top-0 right-2 rounded-b"
+              >
+                Nuevo
+              </span>
+            {/if}
+          </div>
+        </Link>
+      </li>
+    {/each}
+  {:else}
+    <li class="text-center w-full col-span-2">
+      <span class="text-slate-500 text-lg">
+        No hay items <Icon icon="fluent:border-none-20-filled" class="inline" />
+      </span>
+    </li>
+  {/if}
+</ul>

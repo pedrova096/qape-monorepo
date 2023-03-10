@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from '@iconify/svelte';
-  import { Link, navigate } from 'svelte-navigator';
+  import { Link, navigate, Route, useMatch } from 'svelte-navigator';
   import { handleSubmit } from '~/forms/handleSubmit';
   import { getUserById, updateUser } from '~/services/user.services';
   import { authStore, clearAuthStoreToken } from '~/stores/auth.store';
@@ -18,6 +18,7 @@
   import type { EditUserFormType } from '~/forms/editUser.form';
   import { errorMessages } from '~/forms/errorMessages';
   import toast from '~/stores/toast';
+  import MyPublishes from './MyPublishes.svelte';
 
   let userId = $authStore.user?.id || 0;
   let editModal = false;
@@ -108,9 +109,7 @@
     {#if $user}
       <div class="flex flex-col gap-4 mt-8 flex-1 w-full">
         <nav class="bg-slate-100 flex items-center">
-          <Link class="inline-block p-2" to="/profile/publishes"
-            >Mis publicaciones</Link
-          >
+          <Link class="inline-block p-2" to="/profile">Mis publicaciones</Link>
           <Link class="inline-block p-2" to="/profile/buys">Mis compras</Link>
           <div class="ml-auto">
             <Link class="inline-block p-2" to="/items/new">
@@ -118,6 +117,10 @@
             </Link>
           </div>
         </nav>
+        <Route path="/">
+          <MyPublishes />
+        </Route>
+        <Route path="/buys" />
       </div>
     {/if}
   </main>
