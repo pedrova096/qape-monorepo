@@ -6,12 +6,18 @@ import {
   deleteItemById,
   getItemById,
   getItemsByUserId,
+  buyItemById,
+  getBoughtItems,
 } from '../controllers/items.controller';
 import authJWT from '../middleware/authJWT';
 
 const router = Router();
 
 router.get('/search', getItems);
+
+router.post('/:id/buy', authJWT, buyItemById);
+
+router.get('/bought', authJWT, getBoughtItems);
 
 router.get('/:id', getItemById);
 

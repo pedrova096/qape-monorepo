@@ -13,6 +13,7 @@ export type Item = {
   hasCharger: boolean;
   isNew: boolean;
   userId: number;
+  buyerId?: number;
   // status: Available, Sold, Reserved, Deleted
   status: 'AVL' | 'SLD' | 'RSV' | 'DEL';
 };
@@ -31,6 +32,7 @@ export class ItemModel extends Model<Item> {
   public hasCharger!: boolean;
   public isNew!: boolean;
   public userId!: number;
+  public buyerId!: number;
   public status!: Item['status'];
 
   public readonly createdAt!: Date;
@@ -95,6 +97,14 @@ export default function (sequelize: Sequelize) {
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: UserModel,
+          key: 'id',
+        },
+      },
+      buyerId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
         references: {
           model: UserModel,
           key: 'id',

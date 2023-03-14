@@ -101,3 +101,28 @@ export const getItemsByUserId: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+export const buyItemById: RequestHandler = async (req, res, next) => {
+  try {
+    const itemId = parseInt(req.params.id);
+    const userId = req.user.id;
+
+    const item = await itemsService.buyItem(itemId, userId);
+
+    res.json(item);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getBoughtItems: RequestHandler = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+
+    const items = await itemsService.getBoughtItems(userId);
+
+    res.json(items);
+  } catch (error) {
+    next(error);
+  }
+};

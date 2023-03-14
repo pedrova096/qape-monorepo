@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { getUserItems } from '~/services/item.services';
+  import { getBoughtItems } from '~/services/item.services';
   import { useApiCall } from '~/stores/useApiCall';
   import ListItems from '~/lib/atoms/ListItems.svelte';
 
-  const { data: items } = useApiCall(getUserItems, {
+  const { data: items } = useApiCall(getBoughtItems, {
     runOnMount: true,
   });
 </script>
 
-<ListItems items={$items} />
+<ListItems items={$items || []} />

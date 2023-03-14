@@ -100,6 +100,43 @@ class ItemService {
     return updatedItemData;
   }
 
+  public async buyItem(itemId: number, userId: number): Promise<Item> {
+    const findItem = await this.findItemById(itemId);
+
+    if (findItem.userId === userId) {
+      throw new RequestError({
+        status: 400,
+        message: 'No puedes comprar tus propios items',
+        code: 'ITEM_BUY_BY_OWNER',
+      });
+    }
+
+    if (findItem.status === 'SLD') {
+      throw new RequestError({
+        status: 400,
+        message: 'Este item ya fue comprado',
+        code: 'ITEM_ALREADY_BOUGHT',
+      });
+    }
+
+    return this.updateItem(itemId, findItem.userId, {
+      status: 'SLD',
+      buyerId: userId,
+    });
+  }
+
+  public async getBoughtItems(userId: number): Promise<Item[]> {
+    const findItems = await this.items.findAll({
+      where: {
+        ...this._NOT_DELETED,
+        buyerId: userId,
+        status: 'SLD',
+      },
+    });
+
+    return findItems;
+  }
+
   public async deleteItem(itemId: number, userId: number): Promise<Item> {
     const findItem = await this.updateItem(itemId, userId, { status: 'DEL' });
 

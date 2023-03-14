@@ -19,6 +19,7 @@
   import { errorMessages } from '~/forms/errorMessages';
   import toast from '~/stores/toast';
   import MyPublishes from './MyPublishes.svelte';
+  import MyBuys from './MyBuys.svelte';
 
   let userId = $authStore.user?.id || 0;
   let editModal = false;
@@ -107,7 +108,7 @@
       {/if}
     </header>
     {#if $user}
-      <div class="flex flex-col gap-4 mt-8 flex-1 w-full">
+      <div class="flex flex-col gap-4 mt-8 flex-1 w-full pb-4">
         <nav class="bg-slate-100 flex items-center">
           <Link class="inline-block p-2" to="/profile">Mis publicaciones</Link>
           <Link class="inline-block p-2" to="/profile/buys">Mis compras</Link>
@@ -120,7 +121,9 @@
         <Route path="/">
           <MyPublishes />
         </Route>
-        <Route path="/buys" />
+        <Route path="/buys">
+          <MyBuys />
+        </Route>
       </div>
     {/if}
   </main>

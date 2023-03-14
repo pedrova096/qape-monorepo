@@ -1,19 +1,13 @@
 <script lang="ts">
   import type { ItemResponse } from '~/services/item.services';
   import Icon from '@iconify/svelte';
-  import {
-    earphoneFillIcon,
-    earphoneStokeIcon,
-    caseFillAltIcon,
-    caseStokeIcon,
-  } from '~/assets/icons';
   import { Link } from 'svelte-navigator';
   import ItemImage from './ItemImage.svelte';
 
   export let items: ItemResponse[] = [];
 </script>
 
-<ul class="flex-1 grid grid-cols-2 gap-5 items-start">
+<ul class="w-full grid grid-cols-2 gap-5 items-start">
   {#if items.length}
     {#each items as { id, brand, model, description, price, isNew, hasLeft, hasRight, hasCharger } (id)}
       <li

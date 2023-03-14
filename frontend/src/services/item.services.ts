@@ -40,6 +40,12 @@ export const getUserItems = () => {
   });
 };
 
+export const getBoughtItems = () => {
+  return apiService.get<ItemResponse[]>({
+    endpoint: `items/bought`,
+  });
+};
+
 export const createItem = (item: ItemRequest) => {
   return apiService.post<{ created: ItemResponse }>({
     endpoint: `items`,
@@ -50,5 +56,11 @@ export const createItem = (item: ItemRequest) => {
 export const getItemById = (id: number | string) => {
   return apiService.get<ItemResponse>({
     endpoint: `items/${id}`,
+  });
+};
+
+export const buyItem = (id: number | string) => {
+  return apiService.post<ItemResponse>({
+    endpoint: `items/${id}/buy`,
   });
 };

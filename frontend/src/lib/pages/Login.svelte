@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Link, navigate } from 'svelte-navigator';
+  import { Link, navigate, useLocation, useParams } from 'svelte-navigator';
   import Icon from '@iconify/svelte';
   import dots from '~/assets/decoration-dots.png';
   import Input from '~/lib/atoms/Input.svelte';
@@ -15,12 +15,22 @@
   import { authStore } from '~/stores/auth.store';
   import { onDestroy } from 'svelte';
 
+  const location = useLocation();
+
+  const getRedirectUri = () => {
+    const params = new URLSearchParams($location.search);
+    if (params.get('redirect_uri')?.startsWith('/')) {
+      return params.get('redirect_uri');
+    }
+    return '/search';
+  };
+
   const { execute: signInCall, flags } = useApiCall(signIn, {
     runOnMount: false,
     onSuccess: (result) => {
       $authStore = result;
       toast.success('¡Bienvenido de vuelta!');
-      navigate('/search', { replace: true });
+      navigate(getRedirectUri(), { replace: true });
     },
     onError: (error) => {
       toast.error('Hubo un error al iniciar sesión.');
