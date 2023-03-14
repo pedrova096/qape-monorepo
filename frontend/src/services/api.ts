@@ -109,4 +109,4 @@ export class RequestError<T = unknown> extends Error {
   }
 }
 
-export const apiService = new ApiService('http://localhost:8080');
+export const apiService = new ApiService(import.meta.env.VITE_API_URL);
