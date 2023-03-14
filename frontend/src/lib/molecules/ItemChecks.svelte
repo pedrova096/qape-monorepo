@@ -9,6 +9,7 @@
   } from '~/assets/icons';
   import CheckIcon from '~/lib/atoms/CheckIcon.svelte';
 
+  export let showText: boolean = true;
   export let isNew: boolean = undefined;
   export let hasRight: boolean;
   export let hasLeft: boolean;
@@ -22,8 +23,8 @@
   <CheckIcon
     id="isNew"
     bind:checked={isNew}
-    label="Son nuevos"
-    labelInactive="No son nuevos"
+    label={showText ? 'Son nuevos' : ''}
+    labelInactive={showText ? 'No son nuevos' : ''}
     onChange={onIsNewChange}
   >
     <Icon
@@ -42,9 +43,9 @@
 <CheckIcon
   id="hasRight"
   bind:checked={hasRight}
-  label="Con lado derecho"
+  label={showText ? 'Con lado derecho' : ''}
+  labelInactive={showText ? 'Sin lado derecho' : ''}
   onChange={onCharacteristicsChange}
-  labelInactive="Sin lado derecho"
 >
   <img
     src={earphoneFillIcon}
@@ -62,9 +63,9 @@
 <CheckIcon
   id="hasLeft"
   bind:checked={hasLeft}
-  label="Con lado izquierdo"
+  label={showText ? 'Con lado izquierdo' : ''}
+  labelInactive={showText ? 'Sin lado izquierdo' : ''}
   onChange={onCharacteristicsChange}
-  labelInactive="Sin lado izquierdo"
 >
   <img
     src={earphoneFillIcon}
@@ -77,9 +78,9 @@
 <CheckIcon
   id="hasCharger"
   bind:checked={hasCharger}
-  label="Con cargador"
+  label={showText ? 'Con cargador' : ''}
+  labelInactive={showText ? 'Sin cargador' : ''}
   onChange={onCharacteristicsChange}
-  labelInactive="Sin cargador"
 >
   <img src={caseFillIcon} alt="earphoneFillIcon" class="invert" slot="active" />
   <img src={caseStokeIcon} alt="earphoneStokeIcon" slot="inactive" />

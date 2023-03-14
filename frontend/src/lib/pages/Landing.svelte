@@ -3,6 +3,7 @@
   import Button from '~/lib/atoms/Button.svelte';
   import DecorationDots from '~/lib/atoms/DecorationDots.svelte';
   import Icon from '@iconify/svelte';
+  import { Link } from 'svelte-navigator';
 </script>
 
 <div class="w-full flex justify-center">
@@ -18,8 +19,12 @@
         tener audífonos incompletos o piezas extras.
       </p>
       <div class="flex w-2/3 gap-10 mt-10">
-        <Button class="flex-1" variant="outline">Vender</Button>
-        <Button class="flex-1" variant="fill">Buscar</Button>
+        <Link to="/profile" class="flex-1">
+          <Button class="w-full" variant="outline">Vender</Button>
+        </Link>
+        <Link to="/search" class="flex-1">
+          <Button class="w-full" variant="fill">Buscar</Button>
+        </Link>
       </div>
     </section>
     <section class="w-1/2 h-full overflow-hidden flex justify-center relative">

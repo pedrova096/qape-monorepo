@@ -1,4 +1,4 @@
-import { Op, WhereOptions } from 'sequelize';
+import { Op, Sequelize, WhereOptions } from 'sequelize';
 import DB from '../database';
 import type { Item } from '../database/models/items.model';
 import { isEmpty } from '../utility/common';
@@ -125,43 +125,60 @@ class ItemService {
     from = 0,
     limit = 10
   ): Promise<Item[]> {
-    const whereFilter: WhereOptions<Item> = {
-      status: 'AVL',
-    };
+    const whereFilter: WhereOptions<Item>[] = [
+      {
+        status: 'AVL',
+      },
+    ];
 
     if (brand) {
-      whereFilter.brand = {
-        [Op.like]: `%${brand}%`,
-      };
+      whereFilter.push(
+        Sequelize.where(
+          Sequelize.fn('lower', Sequelize.col('brand')),
+          'LIKE',
+          `%${brand.toLowerCase()}%`
+        )
+      );
     }
 
     if (minPrice) {
-      whereFilter.price = {
-        [Op.gte]: minPrice,
-      };
+      whereFilter.push({
+        price: {
+          [Op.gte]: minPrice,
+        },
+      });
     }
 
     if (maxPrice) {
-      whereFilter.price = {
-        ...(whereFilter.price as object),
-        [Op.lte]: maxPrice,
-      };
+      whereFilter.push({
+        price: {
+          [Op.lte]: maxPrice,
+        },
+      });
     }
 
     if (!isEmpty(hasRight)) {
-      whereFilter.hasRight = hasRight;
+      whereFilter.push({
+        hasRight,
+      });
     }
 
     if (!isEmpty(hasLeft)) {
-      whereFilter.hasLeft = hasLeft;
+      whereFilter.push({
+        hasLeft,
+      });
     }
 
     if (!isEmpty(hasRight)) {
-      whereFilter.hasCharger = hasCharger;
+      whereFilter.push({
+        hasCharger,
+      });
     }
 
     const findItems = await this.items.findAll({
-      where: whereFilter,
+      where: {
+        [Op.and]: whereFilter,
+      },
       limit,
       offset: from,
     });

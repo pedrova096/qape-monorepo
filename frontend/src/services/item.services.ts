@@ -17,6 +17,23 @@ export type ItemResponse = {
 
 export type ItemRequest = Omit<ItemResponse, 'id' | 'userId' | 'status'>;
 
+export type QuerySearchItem = {
+  brand?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  hasRight?: boolean;
+  hasLeft?: boolean;
+  hasCharger?: boolean;
+};
+
+export const getSearchItem = (query?: QuerySearchItem) => {
+  return apiService.get<ItemResponse[]>({
+    endpoint: `items/search?${
+      query ? new URLSearchParams(query as Record<string, string>) : ''
+    }`,
+  });
+};
+
 export const getUserItems = () => {
   return apiService.get<ItemResponse[]>({
     endpoint: `items`,

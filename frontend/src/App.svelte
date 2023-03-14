@@ -7,6 +7,7 @@
     Profile,
     NewItems,
     ItemDetail,
+    Search,
   } from '~/lib/pages';
   import HeaderNav from '~/lib/molecules/HeaderNav.svelte';
   import PublicOnlyRoute from '~/lib/molecules/PublicOnlyRoute.svelte';
@@ -22,6 +23,7 @@
   <Route path="/" component={Landing} />
   <PublicOnlyRoute path="/sign-up" component={SignUp} />
   <PublicOnlyRoute path="/login" component={Login} />
+  <Route path="/search" component={Search} />
   <Route path="/profile/*" component={Profile} />
   <Route path="/items/new" component={NewItems} />
   <Route path="/items/:id" component={ItemDetail} />
