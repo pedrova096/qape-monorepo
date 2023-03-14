@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "build:fe": "yarn workspace qape-fe build",
+    "build:be": "yarn workspace qape-be build"
+  }
+}
