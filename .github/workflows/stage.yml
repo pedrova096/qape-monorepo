@@ -1,0 +1,57 @@
+name: Despliegue a Google VM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # El trabajo `build` se ejecuta en un contenedor con la imagen `node:14`
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: node:14
+    steps:
+      # Realiza el checkout del código
+      - name: Obtener código
+        uses: actions/checkout@v2
+
+      - name: Instalar dependencias
+        run: yarn install --frozen-lockfile
+
+      - name: Construir proyecto
+        run: yarn build
+
+      - name: Subir artefacto de construcción
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: dist
+
+  # El trabajo `deploy` depende del trabajo `build`
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar artefacto de construcción
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+
+      - name: Configurar SSH
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+      # Implementa en una VM de Google, instala las dependencias y reinicia la aplicación
+      - name: Implementar en Google VM, instalar dependencias y reiniciar aplicación
+        run: |
+          scp -r build user@${{ secrets.GOOGLE_VM_IP }}:/home/qape/qape 
+          ssh user@${{ secrets.GOOGLE_VM_IP }} "cd /home/qape/qape && yarn install --frozen-lockfile && pm2 reload ecosystem.config.js"
+
+      # Limpia el artefacto de construcción utilizando la acción `actions/delete-artifact@v2`
+      - name: Limpiar artefacto de construcción
+        uses: actions/delete-artifact@v2
+        with:
+          name: build
