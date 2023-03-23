@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Pedro",
+    "password": "$2b$10$adOioR7D8cKFWjwEaSn2/ep.pcCAbDeNY4cjFxRgkCwUnVaJK4r6u",
+    "email": "pedro@gmail.com",
+    "createdAt": "2023-03-11T17:58:28.512Z",
+    "updatedAt": "2023-03-11T17:58:28.512Z"
+  },
+  {
+    "id": 2,
+    "name": "John",
+    "password": "$2b$10$MxW0gcP9l3XhjIyHcvrogO9smLbH8siF1aqJBFK6LrhslMO750P4C",
+    "email": "john@gmail.com",
+    "createdAt": "2023-03-11T18:07:22.312Z",
+    "updatedAt": "2023-03-11T18:07:22.312Z"
+  },
+  {
+    "id": 3,
+    "name": "Maria",
+    "password": "$2b$10$MxW0gcP9l3XhjIyHcvrogO9smLbH8siF1aqJBFK6LrhslMO750P4C",
+    "email": "maria@gmail.com",
+    "createdAt": "2023-03-11T18:07:22.312Z",
+    "updatedAt": "2023-03-11T18:07:22.312Z"
+  },
+  {
+    "id": 4,
+    "name": "Karl",
+    "password": "$2b$10$adOioR7D8cKFWjwEaSn2/ep.pcCAbDeNY4cjFxRgkCwUnVaJK4r6u",
+    "email": "karl@gmail.com",
+    "createdAt": "2023-03-11T18:07:22.312Z",
+    "updatedAt": "2023-03-11T18:07:22.312Z"
+  }
+]
